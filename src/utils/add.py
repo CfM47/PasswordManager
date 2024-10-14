@@ -1,16 +1,10 @@
 from dbconfig import dbConfig
+from dbUtils import check_existence
 from rich import print as printc
 from rich.console import Console
 from getpass import getpass
 from encription import *
 import pyperclip
-
-def check_existence(name, collection):
-  entry = collection.find_one({"entryName": name})
-  if entry :
-    return True
-  else :
-    return False
   
 def add_account(masterKey, name):
   db = dbConfig()
@@ -57,8 +51,3 @@ def add_card(masterKey, name):
   db.cards.insert_one({ "entryName": name, "code": code, "password" : encrypted_pass})
   # Aquí puedes continuar con el proceso de guardar la cuenta
   printc(f"[green]Account '{name}' added successfully")
-
-
-name = input()
-masterKey = input()
-add_card(masterKey, name)
