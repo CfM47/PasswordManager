@@ -1,10 +1,9 @@
-from dbconfig import dbConfig
-from dbUtils import check_existence
+from dbconfig import *
 from rich import print as printc
 from rich.console import Console
 from getpass import getpass
 from encription import *
-import pyperclip
+from tools import copy_to_clipboard
   
 def add_account(masterKey, name):
   db = dbConfig()
@@ -32,7 +31,7 @@ def add_account(masterKey, name):
   else:
       # Aquí puedes generar una contraseña aleatoria
       password = gen_random_password()
-  pyperclip.copy(password)
+  copy_to_clipboard(password)
   
   encrypted_pass = encript_str(password, get_numeric_key(masterKey))
   db.accounts.insert_one({ "entryName": name, "siteurl": siteurl, "username": username, "password" : encrypted_pass})

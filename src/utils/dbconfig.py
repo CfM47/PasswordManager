@@ -26,10 +26,20 @@ def dbConfig():
 
       db.create_collection("accounts", validator=account_schema)
       db.create_collection("cards", validator=card_schema)
-    else:
-      printc(f"[green]Database '{db_name}' already exists.[/green]")
+      
   except Exception as e:
     console.print_exception(show_locals=True)
     
   printc("[green][+] Database set up succesfully [/green]")
   return db
+
+def check_existence(name, collection):
+  entry = collection.find_one({"entryName": name})
+  if entry :
+    return True
+  else :
+    return False
+  
+def get_entry(name, collection):
+  entry = collection.find_one({"entryName": name})
+  return entry
