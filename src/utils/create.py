@@ -5,7 +5,7 @@ from getpass import getpass
 from encription import *
 from tools import copy_to_clipboard
   
-def add_account(masterKey, name):
+def create_account(masterKey, name):
   db = dbConfig()
   
   if check_existence(name, db.accounts):
@@ -38,7 +38,7 @@ def add_account(masterKey, name):
   # Aquí puedes continuar con el proceso de guardar la cuenta
   printc(f"[green]Account '{name}' added successfully")
 
-def add_card(masterKey, name):
+def create_card(masterKey, name):
   db = dbConfig()
   
   if check_existence(name, db.cards):
