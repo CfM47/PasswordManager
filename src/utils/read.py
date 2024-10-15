@@ -1,13 +1,12 @@
 from dbconfig import *
 from rich import print as printc
-from getpass import getpass
 from encription import *
 from tools import *
 
 def read(masterKey, name, collectionName):
   db = dbConfig()
   
-  doc = get_entry(name, db[collectionName])
+  doc = db[collectionName].find_one({"entryName": name})
   if not doc:
     printc(f"[yellow][-][/yellow] Entry with name '{name}' does not exists")
     return

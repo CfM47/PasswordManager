@@ -39,7 +39,3 @@ def check_existence(name, collection):
     return True
   else :
     return False
-  
-def get_entry(name, collection):
-  entry = collection.find_one({"entryName": name})
-  return entry
