@@ -1,17 +1,17 @@
 
-from dbconfig import *
+from utils.dbconfig import *
 from rich import print as printc
-from encription import *
-from tools import *
+from utils.encription import *
+from utils.tools import *
 
 def list_entries(collectionName):
-  db = dbConfig()
+  db = get_db()
   entries = db[collectionName].find()
   for entry in entries:
     print_document(entry, entry["entryName"])
     
 def list_names(collectionName):
-  db = dbConfig()
+  db = get_db()
   entries = db[collectionName].find()
   for entry in entries:
     printc(f"[green]{entry['entryName']}[/green]")

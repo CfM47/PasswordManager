@@ -1,13 +1,9 @@
 import random
 
 def gen_random_password():
+  random.seed()
   chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+|;:,.<>?/"
-  n = random.randint(10, 20)
-  password = ""
-  alph = len(chars)
-  for i in range(n):
-    k = random.randint(0, 2**32)
-    password += chars[k % alph]
+  password = ''.join(random.choices(chars, k=random.randint(10, 20)))
   return password
   
 def get_numeric_key(s):

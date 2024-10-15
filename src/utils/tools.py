@@ -1,8 +1,8 @@
 import tkinter as tk
-from dbconfig import *
+from utils.dbconfig import *
 from rich import print as printc
 from rich.json import JSON
-from encription import *
+from utils.encription import *
 import json
 
 def copy_to_clipboard(text):

@@ -51,19 +51,15 @@ card_schema = {
 user_schema = {
     "$jsonSchema": {
         "bsonType": "object",
-        "required": ["name", "object_ids"],
+        "required": ["name"],
         "properties": {
             "name": {
                 "bsonType": "string",
                 "description": "Debe ser una cadena y es obligatorio"
             },
-            "object_ids": {
-                "bsonType": "array",
-                "items": {
-                    "bsonType": "objectId",
-                    "description": "Debe ser un ObjectId"
-                },
-                "description": "Debe ser un arreglo de ObjectIds y es obligatorio"
+            "hash": {
+                "bsonType": "string",
+                "description": "Debe ser una cadena, obligatoria"
             }
         }
     }

@@ -1,12 +1,12 @@
-from dbconfig import *
+from utils.dbconfig import *
 from rich import print as printc
 from rich.console import Console
 from getpass import getpass
-from encription import *
-from tools import copy_to_clipboard
+from utils.encription import *
+from utils.tools import copy_to_clipboard
   
 def create_account(masterKey, name):
-  db = dbConfig()
+  db = get_db()
   
   if check_existence(name, db.accounts):
     printc("[yellow][-][/yellow] Entry with that name already exists")
@@ -27,19 +27,18 @@ def create_account(masterKey, name):
       printc("[red]Invalid input, please enter a number.[/red]")
     
   if option == 1:
-      password = getpass("Please enter your password: ")
+    password = getpass("Please enter your password: ")
   else:
-      # Aquí puedes generar una contraseña aleatoria
-      password = gen_random_password()
+    password = gen_random_password()
+  print(password)
   copy_to_clipboard(password)
   
   encrypted_pass = encript_str(password, get_numeric_key(masterKey))
-  db.accounts.insert_one({ "entryName": name, "siteurl": siteurl, "username": username, "password" : encrypted_pass})
-  # Aquí puedes continuar con el proceso de guardar la cuenta
-  printc(f"[green]Account '{name}' added successfully")
+  db.accounts.insert_one({ "entryName": name, "siteurl": siteurl, "email": email, "username": username, "password" : encrypted_pass})
+  printc(f"[green]Account '{name}' added successfully, your password has been copied to the clipboard")
 
 def create_card(masterKey, name):
-  db = dbConfig()
+  db = get_db()
   
   if check_existence(name, db.cards):
     printc("[yellow][-][/yellow] Entry with that name already exists")

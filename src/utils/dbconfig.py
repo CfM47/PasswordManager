@@ -1,7 +1,8 @@
 from pymongo import MongoClient
 from rich import print as printc
 from rich.console import Console
-from schemas import *
+from utils.schemas import *
+from utils.encription import *
 from getpass import getpass
 
 console = Console()
@@ -23,6 +24,9 @@ def dbConfig():
         if password == getpass("Re-type: ") and password!="":
           break
         printc("[yellow][-] Please try again.[/yellow]")
+        
+      hash = encript_str(user_name, get_numeric_key(password))
+      db["users"].insert_one({ "name": user_name, "hash" : hash })
 
       db.create_collection("accounts", validator=account_schema)
       db.create_collection("cards", validator=card_schema)
@@ -32,6 +36,11 @@ def dbConfig():
     
   printc("[green][+] Database set up succesfully [/green]")
   return db
+
+def get_db():
+  client = MongoClient("localhost", 27017)
+  db_name = "password-manager"
+  return client[db_name]
 
 def check_existence(name, collection):
   entry = collection.find_one({"entryName": name})

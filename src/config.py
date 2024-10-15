@@ -5,9 +5,7 @@ from rich.console import Console
 
 console = Console()
 
-def initial_config():
-  # Create database  
+def initial_config():  
   db = dbConfig()
-    
-  # Create collections    
+
 initial_config()

@@ -1,10 +1,10 @@
-from dbconfig import *
+from utils.dbconfig import *
 from rich import print as printc
-from encription import *
-from tools import *
+from utils.encription import *
+from utils.tools import *
 
 def delete_entry(name, collectionName):
-  db = dbConfig()
+  db = get_db()
   entry = db[collectionName].find_one({"entryName": name})
   if not entry:
     printc(f"[yellow][-][/yellow] Entry with name '{name}' does not exists")

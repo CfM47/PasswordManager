@@ -1,10 +1,10 @@
-from dbconfig import *
+from utils.dbconfig import *
 from rich import print as printc
-from encription import *
-from tools import *
+from utils.encription import *
+from utils.tools import *
 
 def read(masterKey, name, collectionName):
-  db = dbConfig()
+  db = get_db()
   
   doc = db[collectionName].find_one({"entryName": name})
   if not doc:
