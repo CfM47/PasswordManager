@@ -10,7 +10,7 @@ from utils.list import *
 
 parser = argparse.ArgumentParser(description='Description')
 
-parser.add_argument('option', help='(c)reate / (r)ead / (d)elete / (l)ist')
+parser.add_argument('option', help='(c)reate / (r)ead / (d)elete / (l)ist / list-(d)etails')
 parser.add_argument('type', help='account / card  / all')
 parser.add_argument("-n", "--name", help="Name", required=False)
 
@@ -64,7 +64,21 @@ def handle_delete(actions):
   
 def handle_list(actions):  
   if args.type == None:
-    printc("[red][!][/red] Type (account / card) required ")
+    printc("[red][!][/red] Type (account / card / all) required ")
+    return
+  if not (args.type in ["account", "card", "all"]):
+    printc("[red][!][/red] Invalid value for type")
+    return
+  validateMasterKey = get_validate_password()
+  if len(validateMasterKey) == 0:
+    return
+  
+  actions[args.type]()
+  printc(f"[blue]Entries listed succesfully[/blue]")
+
+def handle_details(actions):
+  if args.type == None:
+    printc("[red][!][/red] Type (account / card / all) required ")
     return
   if not (args.type in ["account", "card", "all"]):
     printc("[red][!][/red] Invalid value for type")
@@ -100,6 +114,12 @@ def main():
       "account": list_account_names,
       "card": list_card_names,
       "all": list_all_names,
+    })
+  if args.option in ["list-details", "d"]:
+    handle_details({
+      "account": list_accounts,
+      "card": list_cards,
+      "all": list_all,
     })
     
 main()
