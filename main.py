@@ -121,5 +121,10 @@ def main():
       "card": list_cards,
       "all": list_all,
     })
-    
-main()
+
+try:
+  main()
+except errors.ServerSelectionTimeoutError:
+    printc("[red][!][/red] Could not connect to MongoDB server. Please check your connection and try again.")
+except:
+  printc("[red][!][/red] An error occured.")
