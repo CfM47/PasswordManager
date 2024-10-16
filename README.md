@@ -1,6 +1,6 @@
 # Password Manager
 
-Password Manager is a command-line application for securely managing accounts and cards. A fun project to test and implement diferent simple encrypting algorithms. It uses MongoDB to store data and provides functionalities to create, read, delete, and list entries.
+Password Manager is a command-line application for securely managing accounts and cards. A fun project to test and implement diferent simple encrypting algorithms and experiment with MongoDb. It uses MongoDB to store data and provides functionalities to create, read, delete, and list entries.
 
 ## Installation
 
